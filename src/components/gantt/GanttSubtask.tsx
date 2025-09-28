@@ -25,7 +25,7 @@ export default function GanttSubtask({
             description={subtask.description}
             assignees={subtask.assignee}
             ganttCalendar={ganttCalendar}
-            color="yellow"
+            color="bg-yellow-500"
             onDateUpdate={(start, due) => {
                 updateSubtask(taskId, {
                     ...subtask,
