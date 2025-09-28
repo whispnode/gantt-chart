@@ -28,6 +28,17 @@ export default function SvgLink({ ...props }: Props) {
     const [parentWidth, setParentWidth] = useState<UndefinedNumber>(undefined);
     const [parentHeight, setParentHeight] = useState<number>(0);
 
+    const calcChildLeft = useCallback(
+        (task: TaskType) => {
+            const timeDifference =
+                new Date(task.startDate).getTime() -
+                new Date(ganttCalendar.startDate).getTime();
+            const dayDifference = timeDifference / (1000 * 3600 * 24);
+            return Math.floor(dayDifference) * ganttCalendar.gantt_box_size;
+        },
+        [ganttCalendar]
+    );
+
     useEffect(() => {
         if (
             parentLeft === undefined ||
@@ -62,18 +73,7 @@ export default function SvgLink({ ...props }: Props) {
         });
 
         setChildPositions(newChildPositions);
-    }, [parentLeft, parentWidth, activeList, parentItem]);
-
-    const calcChildLeft = useCallback(
-        (task: TaskType) => {
-            const timeDifference =
-                new Date(task.startDate).getTime() -
-                new Date(ganttCalendar.startDate).getTime();
-            const dayDifference = timeDifference / (1000 * 3600 * 24);
-            return Math.floor(dayDifference) * ganttCalendar.gantt_box_size;
-        },
-        [ganttCalendar]
-    );
+    }, [parentLeft, parentWidth, activeList, parentItem, calcChildLeft]);
 
     useEffect(() => {
         if (parentItem) {
@@ -133,10 +133,7 @@ export default function SvgLink({ ...props }: Props) {
 
     const renderPaths = () => {
         return childPositions.map(
-            (
-                { left: childTaskLeft, height: childTaskHeight, childItem },
-                index
-            ) => {
+            ({ left: childTaskLeft, height: childTaskHeight }, index) => {
                 if (parentLeft === undefined || parentWidth === undefined)
                     return;
 
