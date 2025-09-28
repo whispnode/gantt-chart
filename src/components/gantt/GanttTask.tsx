@@ -20,7 +20,7 @@ export default function GanttTask({ task, ganttCalendar }: Props) {
             description={task.description}
             assignees={task.assignee}
             ganttCalendar={ganttCalendar}
-            color="lime"
+            color="bg-lime-500"
             onDateUpdate={(start, due) => {
                 updateTask({ ...task, startDate: start, dueDate: due });
             }}
