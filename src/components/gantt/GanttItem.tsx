@@ -84,7 +84,7 @@ export default function GanttItem({
         <div
             ref={ref}
             style={{ left: `${initLeft}px`, width: `${taskWidth}px` }}
-            className={`bg-${color}-500 z-[4] flex items-center px-4 h-[45px] absolute cursor-pointer`}
+            className={`${color} z-[4] flex items-center px-4 h-[45px] absolute cursor-pointer`}
         >
             <div
                 className={`text-white w-full h-full flex items-center gap-x-3`}
@@ -93,13 +93,13 @@ export default function GanttItem({
                     {visibleAssignees.map((a, i) => (
                         <div
                             key={i}
-                            className={`size-8 bg-lime-50 grid place-items-center text-sm rounded-full`}
+                            className={`size-8 bg-white grid place-items-center text-sm rounded-full`}
                         >
                             {a.charAt(1).toUpperCase()}
                         </div>
                     ))}
                     {assignees.length - visibleAssignees.length > 0 && (
-                        <div className="size-8 text-card-foreground bg-card grid place-items-center text-sm rounded-full">
+                        <div className="size-8 grid place-items-center text-sm rounded-full">
                             +{assignees.length - visibleAssignees.length}
                         </div>
                     )}
