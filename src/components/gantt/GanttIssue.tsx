@@ -27,7 +27,7 @@ export default function GanttIssue({
             description={issue.description}
             assignees={issue.assignee}
             ganttCalendar={ganttCalendar}
-            color="red"
+            color="bg-red-500"
             onDateUpdate={(start, due) => {
                 updateIssue(
                     taskId,
